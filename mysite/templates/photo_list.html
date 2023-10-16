@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 style="text-align: center;"><span id="typed"></span></h1>
+      <script>
+        var typed = new Typed('#typed',{
+                        strings:["Apply Different Filters and Enjoy!","Make Memories Refreshing Here!"],
+                        backSpeed: 25,
+                        smartBackspace: true,
+                        backDelay: 1200,
+                        startDelay: 1000,
+                        typeSpeed: 50,
+                        loop: true,
+                        repeat:AnimationEffect,
+
+                      });
+      </script>
+
+  
+  <hr>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4"><strong>Instructions for Color Filter</strong></h1>
+      <p class="lead">1) Please select the filter you want to apply on your image.</p>
+      <p class="lead">2) Insert the image you want to apply the filter on.</p>
+      <p class="lead">3) You will get you refreshing Image with applied filter.</p>
+    </div>
+  </div>
+  <form method="post" enctype="multipart/form-data" id="formUpload">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+  </form>
+
+  {% load static %}
+  <H1 style="text-align: center;">Select The Color Filter You Want: -</H1>
+  <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+  <div class="w3-content" style="max-width:300px">
+    {% load static %}
+
+  <form action="/success/",method="POST">{%csrf_token%}
+    {% load static %}
+    <div class="w3-col s4">
+      <a href="/red/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'red.jpg' %}"  style="width:50%;cursor:pointer" onclick="currentDiv(1)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/yellow/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'yellow.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(2)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/green/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'green.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(3)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/cyan/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'cyan.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(4)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/none/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'none.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(5)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/orange/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'orange.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(6)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/purple/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'purple.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(7)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/blue/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'blue.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(8)"></a>
+    </div>
+    <div class="w3-col s4">
+      <a href="/grey/"><img class="demo w3-opacity w3-hover-opacity-off" src="{% static 'grey.jpg' %}" style="width:50%;cursor:pointer" onclick="currentDiv(9)"></a>
+    </div>
+    <!-- <input id="search" name="search" type="text" class="query-search" placeholder="Search..."> -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </div>
+    <br>
+  </form>
+  <hr>
+  <h1 style="text-align: center;"><strong>Photo Gallery</strong></h1>
+  <div>
+    <div class="row" style="margin-top: 20px">
+      {% for photo in photos %}
+        <div class="col-sm-4 col-md-3">
+          <img src="{{ photo.file.url }}" class="thumbnail">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

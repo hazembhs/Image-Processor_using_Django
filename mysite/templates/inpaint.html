@@ -1,0 +1,56 @@
+
+  {% extends 'base1.html' %}
+
+  {% block content %}
+  {% load static %}
+      <h1 style="color:white; text-align: center;"><span id="typed"></span></h1>
+          <script>
+            var typed = new Typed('#typed',{
+                            strings:["Let our Restoration Tool Restore Your Old Memories!","Cherish Your Old Memories With A Healing Touch From Our Tool!"],
+                            backSpeed: 25,
+                            smartBackspace: true,
+                            backDelay: 1200,
+                            startDelay: 1000,
+                            typeSpeed: 50,
+                            loop: true,
+                            repeat:AnimationEffect,
+
+                          });
+          </script>
+        <br>
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Instructions for Inpainting</h1>
+          <p class="lead">1) Input the file you'd like to restore in the form of .jpg/.jpeg/.png/.jfif</p>
+          <p class="lead">2) Draw over the damaged parts on your image.</p>
+          <p class="lead">3) Press either 'N' or 'T' on keyboard to see the restore image, If you are not satisfied with results. Then press 'R' again draw over the damaged parts on your image. To upload the restored image, Press 'ESC' key on keyboard</p>
+          <p class="lead">4) Holla! Here You get your restored Image as output Below:)</p>
+        </div>
+      </div>
+      <form method="post" enctype="multipart/form-data" id="formUpload">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit">
+      </form>
+
+      {% load static %}
+      
+      <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+      
+      <!-- <form method="" enctype="multipart/form-data" action="download">
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary" type="submit">Button</button>
+        </div>
+      </form> -->
+      <hr>
+      <h1 style="text-align:center;">Photo Gallery</h1>
+      <div>
+        <div class="row" style="margin-top: 20px">
+          {% for photo in photos %}
+            <div class="col-sm-4 col-md-3">
+              <img src="{{ photo.file.url }}" class="thumbnail">
+            </div>
+          {% endfor %}
+      </div>
+      {% endblock %}
+      
